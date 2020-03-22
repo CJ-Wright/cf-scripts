@@ -151,7 +151,7 @@ class MigrationYamlCreator(Migrator):
         pin_spec: str,
         feedstock_name: str,
         pr_limit: int = 1,
-        bump_number: int = 1,
+        bump_number: int = 0,
         **kwargs: Any,
     ):
         super().__init__(pr_limit=pr_limit,)
@@ -204,7 +204,7 @@ class MigrationYamlCreator(Migrator):
                             .replace("'", "")
                             .strip()
                         )
-                        now = datetime.datetime.now().strftime("%Y.%m.%d")
+                        now = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")
                         found_ver = True
                         if curr_now != now:
                             new_lines.append("{% set version = \"" + now + "\" %}\n")
